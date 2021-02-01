@@ -1,0 +1,29 @@
+{
+    "name": "imponeer/smarty-debug",
+    "description": "Smarty plugin to debug template data",
+    "type": "library",
+    "require": {
+        "symfony/var-dumper": "^5.2",
+        "imponeer/smarty-extensions-contracts": "^1.0",
+        "php": ">=7.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raimondas Rimkevičius",
+            "email": "github@mekdrop.name"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Imponeer\\Smarty\\Extensions\\Debug\\": "src/"
+        }
+    },
+    "keywords": [
+        "smarty",
+        "symfony",
+        "var-dumper",
+        "debug",
+        "smarty-plugins"
+    ]
+}

@@ -1,0 +1,22 @@
+name: Auto update project wiki
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*' # Initializes on any new tag
+
+jobs:
+  update_wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkouting main code...
+        uses: actions/checkout@v2
+      - name: Updating Project Wiki...
+        uses: impresscms-dev/phpdocs-wiki-update-action@master
+        with:
+          wiki_github_update_token: ${{secrets.WIKI_GITHUB_UPDATE_TOKEN}}
+          wiki_github_update_user: ${{secrets.WIKI_GITHUB_UPDATE_USER}}
+          class_root_namespace: Imponeer\Contracts\Smarty\
+          include: Imponeer\Contracts\Smarty\**
