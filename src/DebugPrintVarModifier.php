@@ -2,12 +2,9 @@
 
 namespace Imponeer\Smarty\Extensions\Debug;
 
-use Imponeer\Contracts\Smarty\Extension\SmartyFunctionInterface;
 use Imponeer\Contracts\Smarty\Extension\SmartyModifierInterface;
-use Smarty_Internal_Template;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * This describes Smarty debug_print_var var modifier based on symfony var_dumper
@@ -51,7 +48,7 @@ class DebugPrintVarModifier implements SmartyModifierInterface
      * @return string
      */
     public function execute($var): string {
-        $memoryStream = fopen('php://memoryStream', 'r+b');
+        $memoryStream = fopen('php://memory', 'r+b');
 
         $this->dumper->dump(
             $this->cloner->cloneVar($var),
