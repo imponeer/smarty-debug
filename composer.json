@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "symfony/var-dumper": "^5.2",
-        "imponeer/smarty-extensions-contracts": "^1.0",
+        "imponeer/smarty-extensions-contracts": "^1.0 || ^2.0",
         "php": ">=7.1"
     },
     "license": "MIT",
