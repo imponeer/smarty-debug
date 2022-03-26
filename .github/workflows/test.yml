@@ -15,15 +15,14 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        include:
-          - composer: 2
-            php: 8.0
-          - composer: 1
-            php: 7.2
-          - composer: 1
-            php: 7.3
-          - composer: 1
-            php: 7.4
+        php:
+          - 7.2
+          - 7.3
+          - 7.4
+          - 8.0
+          - 8.1
+        composer: 
+          - 2  
     name: Test - php:${{ matrix.php }}; composer:${{ matrix.composer }}
     steps:
       - name: Checkout
