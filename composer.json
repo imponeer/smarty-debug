@@ -3,9 +3,9 @@
     "description": "Smarty plugin to debug template data",
     "type": "library",
     "require": {
-        "symfony/var-dumper": "^5.2",
-        "imponeer/smarty-extensions-contracts": "^1.0 || ^2.0",
-        "php": ">=7.1"
+        "symfony/var-dumper": "^5.2 || ^6.0",
+        "imponeer/smarty-extensions-contracts": "^3.0",
+        "php": "^7.3 || ^8.0"
     },
     "license": "MIT",
     "authors": [
@@ -25,5 +25,11 @@
         "var-dumper",
         "debug",
         "smarty-plugins"
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "scripts": {
+        "test": "phpunit --testdox"
+    }
 }
