@@ -27,7 +27,7 @@
         "smarty-plugins"
     ],
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "scripts": {
         "test": "phpunit --testdox"
