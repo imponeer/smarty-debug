@@ -2,8 +2,10 @@
 
 namespace Imponeer\Smarty\Extensions\Debug;
 
+use ErrorException;
 use Imponeer\Contracts\Smarty\Extension\SmartyModifierInterface;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 /**
@@ -29,7 +31,7 @@ class DebugPrintVarModifier implements SmartyModifierInterface
     public function __construct()
     {
         $this->cloner = new VarCloner();
-        $this->dumper = new HtmlDumper();
+        $this->dumper = (PHP_SAPI === 'cli') ? new CliDumper() : new HtmlDumper();
     }
 
     /**
@@ -46,6 +48,8 @@ class DebugPrintVarModifier implements SmartyModifierInterface
      * @param mixed $var Variable to print
      *
      * @return string
+     *
+     * @throws ErrorException
      */
     public function execute($var): string {
         $memoryStream = fopen('php://memory', 'r+b');
