@@ -1,10 +1,10 @@
 [![License](https://img.shields.io/github/license/imponeer/smarty-debug.svg)](LICENSE)
-[![GitHub release](https://img.shields.io/github/release/imponeer/smarty-debug.svg)](https://github.com/imponeer/smarty-debug/releases) [![Maintainability](https://api.codeclimate.com/v1/badges/79f89e2fe21c0076c29a/maintainability)](https://codeclimate.com/github/imponeer/smarty-debug/maintainability) [![PHP](https://img.shields.io/packagist/php-v/imponeer/smarty-debug.svg)](http://php.net) 
+[![GitHub release](https://img.shields.io/github/release/imponeer/smarty-debug.svg)](https://github.com/imponeer/smarty-debug/releases) [![Maintainability](https://api.codeclimate.com/v1/badges/79f89e2fe21c0076c29a/maintainability)](https://codeclimate.com/github/imponeer/smarty-debug/maintainability) [![PHP](https://img.shields.io/packagist/php-v/imponeer/smarty-debug.svg)](http://php.net)
 [![Packagist](https://img.shields.io/packagist/dm/imponeer/smarty-debug.svg)](https://packagist.org/packages/imponeer/smarty-debug)
 
 # Smarty Debug
 
-This library provides some Smarty template plugins for adding new language keywords for debugging templates. 
+This library provides some Smarty template plugins for adding new language keywords for debugging templates.
 
 ## Installation
 
@@ -14,16 +14,103 @@ To install and use this package, we recommend to use [Composer](https://getcompo
 composer require imponeer/smarty-debug
 ```
 
-Otherwise, you need to include manually files from `src/` directory. 
+Otherwise, you need to include manually files from `src/` directory.
 
-## Registering in Smarty
+## Setup
 
-If you want to use these extensions from this package in your project you need register them with [`registerPlugin` function](https://www.smarty.net/docs/en/api.register.plugin.tpl) from [Smarty](https://www.smarty.net). For example:
+### Basic Setup
+
+To register the debug extension with Smarty, add the extension class to your Smarty instance:
+
 ```php
-$smarty = new \Smarty();
-$debugPrintVarModifierPlugin = new \Imponeer\Smarty\Extensions\Debug\DebugPrintVarModifier();
-$smarty->registerPlugin('modifier', $debugPrintVarModifierPlugin->getName(), [$debugPrintVarModifierPlugin, 'execute']);
+// Create a Smarty instance
+$smarty = new \Smarty\Smarty();
+
+// Register the debug extension
+$smarty->addExtension(new \Imponeer\Smarty\Extensions\Debug\DebugExtension());
 ```
+
+### Using with Symfony Container
+
+To integrate with Symfony, you can leverage autowiring, which is the recommended approach for modern Symfony applications:
+
+```yaml
+# config/services.yaml
+services:
+    # Enable autowiring and autoconfiguration
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Register your application's services
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'
+
+    # Configure Smarty with the extension
+    # The DebugExtension will be autowired automatically
+    \Smarty\Smarty:
+        calls:
+            - [addExtension, ['@Imponeer\Smarty\Extensions\Debug\DebugExtension']]
+```
+
+Then in your application code, you can simply retrieve the pre-configured Smarty instance:
+
+```php
+// Get the Smarty instance with the debug extension already added
+$smarty = $container->get(\Smarty\Smarty::class);
+```
+
+### Using with PHP-DI
+
+With PHP-DI container, you can take advantage of autowiring for a very simple configuration:
+
+```php
+use function DI\create;
+use function DI\get;
+
+return [
+    // Configure Smarty with the extension
+    \Smarty\Smarty::class => create()
+        ->method('addExtension', get(\Imponeer\Smarty\Extensions\Debug\DebugExtension::class))
+];
+```
+
+Then in your application code, you can retrieve the Smarty instance:
+
+```php
+// Get the configured Smarty instance
+$smarty = $container->get(\Smarty\Smarty::class);
+```
+
+### Using with League Container
+
+If you're using League Container, you can register the extension like this:
+
+```php
+// Create the container
+$container = new \League\Container\Container();
+
+// Register Smarty with the debug extension
+$container->add(\Smarty\Smarty::class, function() {
+    $smarty = new \Smarty\Smarty();
+    // Configure Smarty...
+
+    // Create and add the debug extension
+    $extension = new \Imponeer\Smarty\Extensions\Debug\DebugExtension();
+    $smarty->addExtension($extension);
+
+    return $smarty;
+});
+```
+
+Then in your application code, you can retrieve the Smarty instance:
+
+```php
+// Get the configured Smarty instance
+$smarty = $container->get(\Smarty\Smarty::class);
+```
+
 
 ## Using from templates
 
