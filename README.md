@@ -120,6 +120,28 @@ Debuging variables can be done from templates...
 ```smarty
 {"_AD_INSTALLEDMODULES"|debug_print_var}
 ```
+## Development
+
+### Code Quality Tools
+
+This project uses several tools to ensure code quality:
+
+- **PHPUnit** - For unit testing
+  ```bash
+  composer test
+  ```
+
+- **PHP CodeSniffer** - For coding standards (PSR-12)
+  ```bash
+  composer phpcs    # Check code style
+  composer phpcbf   # Fix code style issues automatically
+  ```
+
+- **PHPStan** - For static analysis
+  ```bash
+  composer phpstan
+  ```
+
 ## How to contribute?
 
 If you want to add some functionality or fix bugs, you can fork, change and create pull request. If you not sure how this works, try [interactive GitHub tutorial](https://skills.github.com).

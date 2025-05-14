@@ -1,0 +1,14 @@
+parameters:
+    # Level 5 is a good starting point for most projects
+    level: 5
+
+    paths:
+        - src
+        - tests
+
+    # Exclude vendor directory
+    excludePaths:
+        - vendor
+
+    # PHP 8.3 compatibility
+    phpVersion: 80300
