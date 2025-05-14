@@ -20,7 +20,7 @@ class DebugExtension extends Base
 
     public function getModifierCallback(string $modifierName): ?callable
     {
-        return match($modifierName) {
+        return match ($modifierName) {
             'debug_print_var' => $this->debugPrintVarModifier,
             default => null
         };
