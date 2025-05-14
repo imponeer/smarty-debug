@@ -1,9 +1,12 @@
 <?php
 
+namespace Imponeer\Smarty\Extensions\Debug\Tests;
+
 use Imponeer\Smarty\Extensions\Debug\DebugExtension;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Smarty\Smarty;
+use stdClass;
 
 class DebugExtensionTest extends TestCase
 {
@@ -78,7 +81,7 @@ class DebugExtensionTest extends TestCase
         $templateCode = urlencode('{$var|debug_print_var}');
 
         $actualOutput = trim(
-            $this->smarty->fetch('eval:urlencode:'.$templateCode)
+            $this->smarty->fetch('eval:urlencode:' . $templateCode)
         );
 
         $this->assertSame($expected, $actualOutput, 'The debug_print_var modifier did not produce the expected output');

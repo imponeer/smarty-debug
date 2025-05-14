@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="Smarty Debug Extension Coding Standard">
+    <description>PSR-12 coding standard for Smarty Debug Extension</description>
+
+    <!-- Display progress -->
+    <arg value="p"/>
+    <!-- Use colors in output -->
+    <arg name="colors"/>
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+
+    <!-- Use PSR-12 as the base standard -->
+    <rule ref="PSR12"/>
+
+    <!-- Paths to check -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+</ruleset>
