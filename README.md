@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/github/license/imponeer/smarty-debug.svg)](LICENSE)
 [![GitHub release](https://img.shields.io/github/release/imponeer/smarty-debug.svg)](https://github.com/imponeer/smarty-debug/releases) [![PHP](https://img.shields.io/packagist/php-v/imponeer/smarty-debug.svg)](http://php.net)
 [![Packagist](https://img.shields.io/packagist/dm/imponeer/smarty-debug.svg)](https://packagist.org/packages/imponeer/smarty-debug)
-[![Smarty version requirement](https://img.shields.io/packagist/dependency-v/imponeer/debug-smarty/smarty%2Fsmarty)](https://smarty-php.github.io)
+[![Smarty version requirement](https://img.shields.io/packagist/dependency-v/imponeer/smarty-debug/smarty%2Fsmarty)](https://smarty-php.github.io)
 
 
 # Smarty Debug
