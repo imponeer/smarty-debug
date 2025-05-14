@@ -1,10 +1,14 @@
 [![License](https://img.shields.io/github/license/imponeer/smarty-debug.svg)](LICENSE)
-[![GitHub release](https://img.shields.io/github/release/imponeer/smarty-debug.svg)](https://github.com/imponeer/smarty-debug/releases) [![Maintainability](https://api.codeclimate.com/v1/badges/79f89e2fe21c0076c29a/maintainability)](https://codeclimate.com/github/imponeer/smarty-debug/maintainability) [![PHP](https://img.shields.io/packagist/php-v/imponeer/smarty-debug.svg)](http://php.net)
+[![GitHub release](https://img.shields.io/github/release/imponeer/smarty-debug.svg)](https://github.com/imponeer/smarty-debug/releases) [![PHP](https://img.shields.io/packagist/php-v/imponeer/smarty-debug.svg)](http://php.net)
 [![Packagist](https://img.shields.io/packagist/dm/imponeer/smarty-debug.svg)](https://packagist.org/packages/imponeer/smarty-debug)
+[![Smarty version requirement](https://img.shields.io/packagist/dependency-v/imponeer/debug-smarty/smarty%2Fsmarty)](https://smarty-php.github.io)
+
 
 # Smarty Debug
 
-This library provides some Smarty template plugins for adding new language keywords for debugging templates.
+> Powerful debugging tools for Smarty templates
+
+This library extends Smarty with specialized debugging capabilities, allowing developers to easily inspect variables and troubleshoot template issues. It integrates with Symfony's VarDumper component to provide rich, formatted output of complex data structures directly in your templates.
 
 ## Installation
 
@@ -112,11 +116,36 @@ $smarty = $container->get(\Smarty\Smarty::class);
 ```
 
 
-## Using from templates
+## Usage
 
-Debuging variables can be done from templates...
+This extension provides modifiers that help with debugging variables in your Smarty templates.
 
-...with `debug_print_var` modifier:
+### debug_print_var
+
+The `debug_print_var` modifier displays the content of a variable in a human-readable format. It works with various data types including strings, numbers, booleans, arrays, and objects.
+
+```smarty
+{$variable|debug_print_var}
+```
+
+#### Examples
+
+**Debugging a simple variable:**
+```smarty
+{"Hello World"|debug_print_var}
+```
+
+**Debugging an array:**
+```smarty
+{$userArray|debug_print_var}
+```
+
+**Debugging a template variable:**
+```smarty
+{$smarty.session|debug_print_var}
+```
+
+**Debugging a configuration variable:**
 ```smarty
 {"_AD_INSTALLEDMODULES"|debug_print_var}
 ```
@@ -142,8 +171,20 @@ This project uses several tools to ensure code quality:
   composer phpstan
   ```
 
-## How to contribute?
+## Documentation
 
-If you want to add some functionality or fix bugs, you can fork, change and create pull request. If you not sure how this works, try [interactive GitHub tutorial](https://skills.github.com).
+API documentation is automatically generated and available in the project's wiki. For more detailed information about the classes and methods, please refer to the [project wiki](https://github.com/imponeer/smarty-debug/wiki).
 
-If you found any bug or have some questions, use [issues tab](https://github.com/imponeer/smarty-debug/issues) and write there your questions.
+## Contributing
+
+Contributions are welcome! Here's how you can contribute:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
+
+Please make sure your code follows the PSR-12 coding standard and include tests for any new features or bug fixes.
+
+If you find a bug or have a feature request, please create an issue in the [issue tracker](https://github.com/imponeer/smarty-debug/issues).
