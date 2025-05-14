@@ -3,7 +3,6 @@
 namespace Imponeer\Smarty\Extensions\Debug;
 
 use ErrorException;
-use Imponeer\Contracts\Smarty\Extension\SmartyModifierInterface;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
@@ -13,7 +12,7 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  *
  * @package Imponeer\Smarty\Extensions\Dump
  */
-class DebugPrintVarModifier implements SmartyModifierInterface
+class DebugPrintVarModifier
 {
     /**
      * @var VarCloner
@@ -25,8 +24,8 @@ class DebugPrintVarModifier implements SmartyModifierInterface
      */
     private $dumper;
 
-    /**
-     * DebugPrintVarModifier constructor.
+    /****
+     * Initializes the variable cloner and selects the appropriate dumper based on the PHP SAPI.
      */
     public function __construct()
     {
@@ -35,23 +34,15 @@ class DebugPrintVarModifier implements SmartyModifierInterface
     }
 
     /**
-     * @inheritDoc
+     * Dumps a variable's contents as a formatted string for debugging.
+     *
+     * Clones and formats the given variable using Symfony's VarDumper, returning the result as a string suitable for CLI or HTML output depending on the environment.
+     *
+     * @param mixed $var The variable to be dumped.
+     * @return string The formatted dump of the variable.
+     * @throws ErrorException If an error occurs during dumping.
      */
-    public function getName(): string
-    {
-        return 'debug_print_var';
-    }
-
-    /**
-     * Executes plugin function
-     *
-     * @param mixed $var Variable to print
-     *
-     * @return string
-     *
-     * @throws ErrorException
-     */
-    public function execute($var): string {
+    public function __invoke($var): string {
         $memoryStream = fopen('php://memory', 'r+b');
 
         $this->dumper->dump(
