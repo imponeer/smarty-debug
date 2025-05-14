@@ -35,7 +35,7 @@ class DebugExtensionTest extends TestCase
     /**
      * Data provider for testModifierInSmartyTemplate
      */
-    public function getInvokeData(): array
+    public static function getInvokeData(): array
     {
         $object = new stdClass();
         $object->test = 'a';
