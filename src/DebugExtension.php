@@ -11,32 +11,18 @@ use Smarty\Extension\Base;
  */
 class DebugExtension extends Base
 {
-    /**
-     * @var DebugPrintVarModifier
-     */
-    private $debugPrintVarModifier;
+    private readonly DebugPrintVarModifier $debugPrintVarModifier;
 
-    /**
-     * DebugExtension constructor.
-     */
     public function __construct()
     {
         $this->debugPrintVarModifier = new DebugPrintVarModifier();
     }
 
-    /**
-     * Get modifier callback
-     *
-     * @param string $modifierName Name of the modifier
-     *
-     * @return callable|null
-     */
-    public function getModifierCallback(string $modifierName)
+    public function getModifierCallback(string $modifierName): ?callable
     {
-        if ($modifierName === 'debug_print_var') {
-            return $this->debugPrintVarModifier;
-        }
-
-        return null;
+        return match($modifierName) {
+            'debug_print_var' => $this->debugPrintVarModifier,
+            default => null
+        };
     }
 }

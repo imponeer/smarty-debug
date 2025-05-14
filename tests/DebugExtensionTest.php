@@ -1,20 +1,14 @@
 <?php
 
 use Imponeer\Smarty\Extensions\Debug\DebugExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Smarty\Smarty;
 
 class DebugExtensionTest extends TestCase
 {
-    /**
-     * @var DebugExtension
-     */
-    private $extension;
-
-    /**
-     * @var Smarty
-     */
-    private $smarty;
+    private readonly DebugExtension $extension;
+    private readonly Smarty $smarty;
 
     protected function setUp(): void
     {
@@ -37,10 +31,9 @@ class DebugExtensionTest extends TestCase
 
     /**
      * Data provider for testModifierInSmartyTemplate
-     *
-     * @return array Test cases with input and expected output
      */
-    public function getInvokeData(): array {
+    public function getInvokeData(): array
+    {
         $object = new stdClass();
         $object->test = 'a';
 
@@ -49,23 +42,23 @@ class DebugExtensionTest extends TestCase
                 'input' => 'test',
                 'expected' => '&quot;test&quot;'
             ],
-            "int" => [
+            'int' => [
                 'input' => 5,
                 'expected' => '5'
             ],
-            "float" => [
+            'float' => [
                 'input' => 4.346,
-                'expected' => "4.346"
+                'expected' => '4.346'
             ],
-            "bool" => [
+            'bool' => [
                 'input' => true,
-                'expected' => "<i>true</i>"
+                'expected' => '<i>true</i>'
             ],
-            "object" => [
+            'object' => [
                 'input' => $object,
                 'expected' => '<b>stdClass Object (1)</b><br><b> -&gt;test</b> = &quot;a&quot;'
             ],
-            "array" => [
+            'array' => [
                 'input' => [
                     'key1' => 'value1',
                     'key2' => 42,
@@ -78,15 +71,8 @@ class DebugExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getInvokeData
-     *
-     * Tests that the debug_print_var modifier works correctly when used in a Smarty template
-     *
-     * @param mixed $input The input value to test
-     * @param string $expected The expected output after applying the modifier
-     */
-    public function testModifierInSmartyTemplate($input, string $expected): void
+    #[DataProvider('getInvokeData')]
+    public function testModifierInSmartyTemplate(mixed $input, string $expected): void
     {
         $this->smarty->assign('var', $input);
         $templateCode = urlencode('{$var|debug_print_var}');
