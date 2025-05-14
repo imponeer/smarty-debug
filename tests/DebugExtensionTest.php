@@ -10,8 +10,8 @@ use stdClass;
 
 class DebugExtensionTest extends TestCase
 {
-    private readonly DebugExtension $extension;
-    private readonly Smarty $smarty;
+    private DebugExtension $extension;
+    private Smarty $smarty;
 
     protected function setUp(): void
     {

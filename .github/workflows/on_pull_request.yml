@@ -36,6 +36,8 @@ jobs:
         run: composer test
       - name: PHP CodeSniffer
         run: composer phpcs
+      - name: PHPStan
+        run: composer phpstan
       - name: Install Composer dependencies (without dev)
         run: composer install --no-progress --no-dev --no-suggest --prefer-dist --optimize-autoloader
 
