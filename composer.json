@@ -3,7 +3,7 @@
     "description": "Smarty plugin to debug template data",
     "type": "library",
     "require": {
-        "symfony/var-dumper": "^5.2 || ^6.0",
+        "symfony/var-dumper": ">=5.2.0 <999.999.999",
         "smarty/smarty": "^5.0",
         "php": "^8.3"
     },
